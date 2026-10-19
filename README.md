@@ -58,11 +58,9 @@ Observer permite notificarea componentelor interesate atunci când are loc un ev
 Metodologie de evaluare
 Cele două variante sunt comparate folosind aceleași cerințe funcționale. Evaluarea poate include:
 
-numărul de clase și fișiere modificate pentru o funcționalitate nouă;
-ușurința adăugării unei metode de plată sau a unui canal de notificare;
-complexitatea și cuplarea codului;
-testabilitatea și rezultatele testelor;
-timpul de răspuns și consumul de resurse, dacă sunt realizate teste de performanță.
-```bash
-git clone <URL-ul-repository-ului>
-cd <numele-proiectului>
+- numărul de clase și fișiere modificate pentru o funcționalitate nouă;
+- ușurința adăugării unei metode de plată sau a unui canal de notificare;
+- complexitatea și cuplarea codului;
+- testabilitatea și rezultatele testelor;
+- timpul de răspuns și consumul de resurse, dacă sunt realizate teste de performanță.
+

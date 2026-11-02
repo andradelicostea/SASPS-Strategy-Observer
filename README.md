@@ -1,4 +1,12 @@
-# SASPS-Strategy-Observer
+# SASPS - Milestone 1: Arhitectura Inițială și Identificarea Anti-Pattern-urilor (Săptămâna 8)
+
+**Membri Echipă:**
+- **DELICOSTEA Andra-Simona** | Grupa ABD2 | delicosteaandra@gmail.com | ID Teams: 125024
+- **BARBUCANU Teodor** | Grupa SAS2 | barbuceanuteodor10@gmail.com | ID Teams: 125017
+- **MAGETZ Radu-Mihai** | Grupa SAS2 | radu.magetz@gmail.com | ID Teams: 125016
+
+---
+
 
 # Studiu comparativ: Strategy și Observer
 
@@ -64,3 +72,56 @@ Cele două variante sunt comparate folosind aceleași cerințe funcționale. Eva
 - testabilitatea și rezultatele testelor;
 - timpul de răspuns și consumul de resurse, dacă sunt realizate teste de performanță.
 
+
+
+##  Obiectivul Milestone-ului 1
+Milestone-ul 1 este dedicat analizei variantei **monolitice inițiale** a sistemului de procesare a comenzilor (`order_system_v1.py`). Scopul principal este identificarea problemelor arhitecturale, a antipattern-urilor de proiectare și evaluarea inițială a complexității codului înainte de refactorizare.
+
+---
+
+##  Structura Fișierelor din Milestone 1
+
+| Nume Fișier | Tip | Descriere |
+| :--- | :--- | :--- |
+| `order_system_v1.py` | Cod Sursă Python | Implementarea monolitică de la care se pornește. |
+| `SASPS_Raport_Milestone_1_AntiPattern.docx` | Document Word | Raportul scris oficial pentru Milestone 1 (Săptămâna 8). |
+| `SASPS_Raport_Milestone_1_AntiPattern.md` | Document Markdown | Versiunea text/markdown a raportului pentru Săptămâna 8. |
+
+---
+
+##  Anti-Pattern-uri Identificate în v1.0
+
+1. **God Object (Clasă Gigant)**:
+   - Clasa `MonolithicOrderProcessor` concentrează toate responsabilitățile sistemului: validare, calcul discount, calcul transport, procesare plată, gestiune stocuri și trimitere de notificări Email/SMS.
+   - Violarea directă a principiului **Single Responsibility Principle (SRP)**.
+
+2. **Hardcoded Notification Logic (Cuplare Strânsă)**:
+   - Trimiterea mesajelor de confirmare prin Email și SMS este hardcodată direct în metoda de procesare.
+   - Imposibilitatea adăugării de noi canale de notificare (ex: WhatsApp, Push Notifications) fără modificarea codului sursă.
+
+3. **Rigid Conditional Switch (Violare Open/Closed Principle - OCP)**:
+   - Calculul discount-urilor și al taxelor de transport se bazează pe instrucțiuni `if-elif-else` lungi și rigide.
+   - Orice tip nou de discount (ex: campanie de Black Friday) necesită modificarea metodei monolitice, crescând riscul de regresie și introducere de bug-uri.
+
+---
+
+## Metrici Evaluat în Milestone 1
+- **Complexitate Ciclomatică Maxima (McCabe)**: **22** (în metoda `process_order`).
+- **Complexitate Ciclomatică Medie**: **11.5**.
+- **Grad de Cuplare**: Extrem de ridicat (Tight Coupling).
+- **Testabilitate**: Scăzută (necesită mock-uri complexe sau procesarea întregului flux pentru un simplu calcul).
+
+---
+
+## Instrucțiuni de Rulare în PyCharm / Terminal
+
+### Cerințe:
+- Python 3.10+ installed.
+
+### Execuție:
+1. Deschideți proiectul în **PyCharm**.
+2. Rulați fișierul `order_system_v1.py`:
+   ```bash
+   python order_system_v1.py
+   ```
+3. În consolă se va afișa simularea procesării comenzii prin sistemul monolitic, evidențiind modul în care notificările și calculele sunt executate secvențial și rigid.
